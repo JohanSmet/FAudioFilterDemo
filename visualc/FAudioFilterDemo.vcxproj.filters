@@ -27,6 +27,9 @@
     <ClCompile Include="..\src\gl3w\GL\gl3w.c">
       <Filter>src\gl3w</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\main_gui.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\imgui\imconfig.h">
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="..\src\gl3w\GL\glcorearb.h">
       <Filter>src\gl3w</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\main_gui.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
