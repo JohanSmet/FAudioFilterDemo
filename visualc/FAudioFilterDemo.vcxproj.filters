@@ -77,5 +77,8 @@
     <ClInclude Include="..\src\audio.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\audio_player.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

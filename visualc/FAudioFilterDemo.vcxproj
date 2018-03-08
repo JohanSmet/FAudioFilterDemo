@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\audio.h" />
+    <ClInclude Include="..\src\audio_player.h" />
     <ClInclude Include="..\src\gl3w\GL\gl3w.h" />
     <ClInclude Include="..\src\gl3w\GL\glcorearb.h" />
     <ClInclude Include="..\src\imgui\imconfig.h" />
