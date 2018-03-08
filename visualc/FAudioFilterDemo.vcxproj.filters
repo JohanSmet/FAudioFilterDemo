@@ -33,6 +33,12 @@
     <ClCompile Include="..\src\oscillator.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\audio.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\audio_xaudio.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\imgui\imconfig.h">
@@ -66,6 +72,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\oscillator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\audio.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
