@@ -22,12 +22,22 @@ int next_window_dims(int y_pos, int height)
 
 void main_gui()
 {
+	bool update_engine = false;
 	bool update_sine = false;
 	bool update_square = false;
 	bool update_saw = false;
 
 	// gui
-	int window_y = next_window_dims(0, 80);
+	int window_y = next_window_dims(0, 50);
+	ImGui::Begin("Output Audio Engine");
+
+		static int audio_engine = (int)AudioEngine_FAudio;
+		update_engine |= ImGui::RadioButton("FAudio", &audio_engine, (int)AudioEngine_FAudio); ImGui::SameLine();
+		update_engine |= ImGui::RadioButton("XAudio2", &audio_engine, (int)AudioEngine_XAudio2);
+
+	ImGui::End();
+
+	window_y = next_window_dims(window_y, 80);
 	ImGui::Begin("Sine Wave Generator");
 		
 		static int sine_note = 60;
@@ -63,17 +73,23 @@ void main_gui()
 	// audio control
 	static AudioPlayer	player;
 
-	if (update_sine)
+	if (update_engine)
+	{
+		player.shutdown();
+		player.setup((AudioEngine)audio_engine);
+	}
+
+	if (update_sine | update_engine)
 	{
 		player.oscillator_change(AudioPlayer::SineWave, note_to_frequency(sine_note), sine_volume);
 	}
 
-	if (update_square)
+	if (update_square | update_engine)
 	{
 		player.oscillator_change(AudioPlayer::SquareWave, note_to_frequency(square_note), square_volume);
 	}
 
-	if (update_saw)
+	if (update_saw | update_engine)
 	{
 		player.oscillator_change(AudioPlayer::SawTooth, note_to_frequency(saw_note), saw_volume);
 	}

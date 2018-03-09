@@ -20,7 +20,7 @@ class AudioPlayer
 			oscillator_square_wave(&m_oscillators[SquareWave]);
 			oscillator_saw_tooth(&m_oscillators[SawTooth]);
 
-			setup(AudioEngine_XAudio2);
+			setup(AudioEngine_FAudio);
 		}
 
 		void setup(AudioEngine p_engine) 
