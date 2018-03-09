@@ -26,6 +26,7 @@ void main_gui()
 	bool update_sine = false;
 	bool update_square = false;
 	bool update_saw = false;
+	bool update_filter = false;
 
 	// gui
 	int window_y = next_window_dims(0, 50);
@@ -70,6 +71,25 @@ void main_gui()
 
 	ImGui::End();
 
+	window_y = next_window_dims(window_y, 100);
+	ImGui::Begin("Filter");
+
+		static int filter_type = -1;
+		static int filter_cutoff_note = 60;
+		static float filter_q = 0.7f;
+
+	update_filter |= ImGui::RadioButton("None", &filter_type, -1); ImGui::SameLine();
+	update_filter |= ImGui::RadioButton("Low-Pass", &filter_type, 0); ImGui::SameLine();
+	update_filter |= ImGui::RadioButton("Band-Pass", &filter_type, 1); ImGui::SameLine();
+	update_filter |= ImGui::RadioButton("High-Pass", &filter_type, 2); ImGui::SameLine();
+	update_filter |= ImGui::RadioButton("Notch", &filter_type, 3); 
+
+	update_filter |= ImGui::SliderInt("Cutoff Frequency", &filter_cutoff_note, 12, 108);
+	update_filter |= ImGui::SliderFloat("Q", &filter_q, 0.7f, 100.0f, "%.1f");
+
+	ImGui::End();
+
+
 	// audio control
 	static AudioPlayer	player;
 
@@ -92,5 +112,10 @@ void main_gui()
 	if (update_saw | update_engine)
 	{
 		player.oscillator_change(AudioPlayer::SawTooth, note_to_frequency(saw_note), saw_volume);
+	}
+
+	if (update_filter | update_engine)
+	{
+		player.filter_change(filter_type, note_to_frequency(filter_cutoff_note), filter_q);
 	}
 }
