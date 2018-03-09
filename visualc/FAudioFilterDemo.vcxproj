@@ -88,13 +88,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w;../libs/FACT/src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../SDL2/lib/x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>XAudio2.lib;SDL2Main.lib;SDL2.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../SDL2/lib/x86;$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FAudio.lib;XAudio2.lib;SDL2Main.lib;SDL2.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -104,12 +104,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w;../libs/FACT/src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../SDL2/lib/x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../SDL2/lib/x64;$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>XAudio2.lib;SDL2Main.lib;SDL2.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -122,15 +122,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w;../libs/FACT/src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../SDL2/lib/x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>XAudio2.lib;SDL2Main.lib;SDL2.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../SDL2/lib/x86;$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FAudio.lib;XAudio2.lib;SDL2Main.lib;SDL2.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,19 +142,20 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../SDL2/include;../src/gl3w;../libs/FACT/src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../SDL2/lib/x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../SDL2/lib/x64;$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>XAudio2.lib;SDL2Main.lib;SDL2.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\audio.cpp" />
+    <ClCompile Include="..\src\audio_faudio.cpp" />
     <ClCompile Include="..\src\audio_xaudio.cpp" />
     <ClCompile Include="..\src\gl3w\GL\gl3w.c" />
     <ClCompile Include="..\src\imgui\imgui.cpp" />

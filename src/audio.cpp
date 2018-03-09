@@ -11,6 +11,7 @@ PFN_AUDIO_FILTER_UPDATE audio_filter_update = nullptr;
 PFN_AUDIO_FILTER_APPLY audio_filter_apply = nullptr;
 
 extern AudioContext *xaudio_create_context();
+extern AudioContext *faudio_create_context();
 
 AudioContext *audio_create_context(AudioEngine p_engine)
 {
@@ -18,6 +19,9 @@ AudioContext *audio_create_context(AudioEngine p_engine)
 	{
 		case AudioEngine_XAudio2:
 			return xaudio_create_context();
+
+		case AudioEngine_FAudio:
+			return faudio_create_context();
 		
 		default:
 			return nullptr;
