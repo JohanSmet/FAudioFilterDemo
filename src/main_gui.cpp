@@ -34,7 +34,9 @@ void main_gui()
 
 		static int audio_engine = (int)AudioEngine_FAudio;
 		update_engine |= ImGui::RadioButton("FAudio", &audio_engine, (int)AudioEngine_FAudio); ImGui::SameLine();
+		#ifdef HAVE_XAUDIO2
 		update_engine |= ImGui::RadioButton("XAudio2", &audio_engine, (int)AudioEngine_XAudio2);
+		#endif
 
 	ImGui::End();
 

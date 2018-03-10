@@ -1,6 +1,8 @@
 #ifndef FAUDIOFILTERDEMO_AUDIO_H
 #define FAUDIOFILTERDEMO_AUDIO_H
 
+#include <stddef.h>
+
 const float PI = 3.14159265358979323846f;
 
 // types
@@ -37,4 +39,4 @@ extern PFN_AUDIO_CREATE_FILTER audio_create_filter;
 extern PFN_AUDIO_FILTER_UPDATE audio_filter_update;
 extern PFN_AUDIO_FILTER_APPLY audio_filter_apply;
 
-#endif FAUDIOFILTERDEMO_AUDIO_H
+#endif // FAUDIOFILTERDEMO_AUDIO_H

@@ -4,3 +4,4 @@ visualc/.vs/
 visualc/Debug/
 visualc/imgui.ini
 visualc/SDL2.dll
+*.o

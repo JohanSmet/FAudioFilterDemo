@@ -139,7 +139,7 @@ AudioContext *faudio_create_context()
 	// create a mastering voice
 	FAudioMasteringVoice *mastering_voice;
 
-	hr = FAudio_CreateMasteringVoice(faudio, &mastering_voice, FAUDIO_DEFAULT_CHANNELS, FAUDIO_DEFAULT_SAMPLERATE, 0, NULL, NULL);
+	hr = FAudio_CreateMasteringVoice(faudio, &mastering_voice, FAUDIO_DEFAULT_CHANNELS, FAUDIO_DEFAULT_SAMPLERATE, 0, 0, NULL);
 	if (hr != 0)
 		return nullptr;
 
