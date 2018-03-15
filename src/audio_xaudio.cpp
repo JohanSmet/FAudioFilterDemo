@@ -28,15 +28,15 @@ void xaudio_destroy_context(AudioContext *p_context)
 	delete p_context;
 }
 
-AudioVoice *xaudio_create_voice(AudioContext *p_context, float *p_buffer, size_t p_buffer_size, int p_sample_rate)
+AudioVoice *xaudio_create_voice(AudioContext *p_context, float *p_buffer, size_t p_buffer_size, int p_sample_rate, int p_num_channels)
 {
 	// create a source voice
 	WAVEFORMATEX waveFormat;
 	waveFormat.wFormatTag = WAVE_FORMAT_IEEE_FLOAT;
-	waveFormat.nChannels = 1;
+	waveFormat.nChannels = p_num_channels;
 	waveFormat.nSamplesPerSec = p_sample_rate;
-	waveFormat.nAvgBytesPerSec = p_sample_rate * 4;
-	waveFormat.nBlockAlign = 4;
+	waveFormat.nBlockAlign = p_num_channels * 4;
+	waveFormat.nAvgBytesPerSec = waveFormat.nSamplesPerSec * waveFormat.nBlockAlign;
 	waveFormat.wBitsPerSample = 32;
 	waveFormat.cbSize = 0;
 
@@ -51,13 +51,13 @@ AudioVoice *xaudio_create_voice(AudioContext *p_context, float *p_buffer, size_t
 
 	// submit the array
 	XAUDIO2_BUFFER buffer = { 0 };
-	buffer.AudioBytes = 4 * p_buffer_size;
+	buffer.AudioBytes = 4 * p_buffer_size * p_num_channels;
 	buffer.pAudioData = (byte *)p_buffer;
 	buffer.Flags = XAUDIO2_END_OF_STREAM;
 	buffer.PlayBegin = 0;
-	buffer.PlayLength = p_buffer_size;
+	buffer.PlayLength = 0;
 	buffer.LoopBegin = 0;
-	buffer.LoopLength = p_buffer_size;
+	buffer.LoopLength = 0;
 	buffer.LoopCount = XAUDIO2_LOOP_INFINITE;
 
 	hr = voice->SubmitSourceBuffer(&buffer);

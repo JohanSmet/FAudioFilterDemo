@@ -29,14 +29,19 @@ void main_gui()
 	bool update_filter = false;
 
 	// gui
-	int window_y = next_window_dims(0, 55);
+	int window_y = next_window_dims(0, 80);
 	ImGui::Begin("Output Audio Engine");
 
 		static int audio_engine = (int)AudioEngine_FAudio;
-		update_engine |= ImGui::RadioButton("FAudio", &audio_engine, (int)AudioEngine_FAudio); ImGui::SameLine();
-		#ifdef HAVE_XAUDIO2
-		update_engine |= ImGui::RadioButton("XAudio2", &audio_engine, (int)AudioEngine_XAudio2);
+		update_engine |= ImGui::RadioButton("FAudio", &audio_engine, (int)AudioEngine_FAudio);
+		#ifdef HAVE_XAUDIO2 
+		ImGui::SameLine();
+		update_engine |= ImGui::RadioButton("XAudio2", &audio_engine, (int)AudioEngine_XAudio2); 
 		#endif
+
+		static int num_channels = 1;
+		update_engine |= ImGui::RadioButton("1 Channel", &num_channels, 1); ImGui::SameLine();
+		update_engine |= ImGui::RadioButton("2 Channels", &num_channels, 2);
 
 	ImGui::End();
 
@@ -101,7 +106,7 @@ void main_gui()
 	if (update_engine)
 	{
 		player.shutdown();
-		player.setup((AudioEngine)audio_engine);
+		player.setup((AudioEngine)audio_engine, num_channels);
 	}
 
 	if (update_sine | update_engine)

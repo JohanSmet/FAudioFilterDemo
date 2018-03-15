@@ -17,7 +17,7 @@ enum AudioEngine {
 
 typedef void(*PFN_AUDIO_DESTROY_CONTEXT)(AudioContext *p_context);
 
-typedef AudioVoice *(*PFN_AUDIO_CREATE_VOICE)(AudioContext *p_context, float *p_buffer, size_t p_buffer_size, int p_sample_rate);
+typedef AudioVoice *(*PFN_AUDIO_CREATE_VOICE)(AudioContext *p_context, float *p_buffer, size_t p_buffer_size, int p_sample_rate, int p_num_channels);
 typedef void (*PFN_AUDIO_VOICE_DESTROY)(AudioVoice *p_voice);
 typedef void (*PFN_AUDIO_VOICE_SET_VOLUME)(AudioVoice *p_voice, float p_volume);
 typedef void (*PFN_AUDIO_VOICE_SET_FREQUENCY)(AudioVoice *p_vioce, float p_frequency);

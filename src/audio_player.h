@@ -16,19 +16,19 @@ class AudioPlayer
 
 		AudioPlayer() 
 		{
-			oscillator_sine_wave(&m_oscillators[SineWave]);
-			oscillator_square_wave(&m_oscillators[SquareWave]);
-			oscillator_saw_tooth(&m_oscillators[SawTooth]);
-
-			setup(AudioEngine_FAudio);
+			setup(AudioEngine_FAudio, 1);
 		}
 
-		void setup(AudioEngine p_engine) 
+		void setup(AudioEngine p_engine, int p_channels) 
 		{
+			oscillator_sine_wave(&m_oscillators[SineWave], p_channels);
+			oscillator_square_wave(&m_oscillators[SquareWave], p_channels);
+			oscillator_saw_tooth(&m_oscillators[SawTooth], p_channels);
+
 			m_context = audio_create_context(p_engine);
 			for (int idx = 0; idx < Oscillator_Count; ++idx)
 			{
-				m_voices[idx] = audio_create_voice(m_context, m_oscillators[idx].buffer, Oscillator::BUFFER_LENGTH, Oscillator::SAMPLE_RATE);
+				m_voices[idx] = audio_create_voice(m_context, m_oscillators[idx].buffer, Oscillator::CHANNEL_BUFFER_LENGTH, Oscillator::SAMPLE_RATE, p_channels);
 			}
 			m_filter = audio_create_filter(m_context);
 		}
@@ -64,7 +64,7 @@ class AudioPlayer
 		}
 
 	private : 
-		Oscillator		m_oscillators[Oscillator_Count];
+		Oscillator		m_oscillators[Oscillator_Count] = { 0 };
 		AudioContext *	m_context;
 		AudioVoice *	m_voices[Oscillator_Count];
 		AudioFilter *	m_filter; 
