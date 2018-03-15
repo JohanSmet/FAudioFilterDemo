@@ -15,7 +15,7 @@ float note_to_frequency(int p_note)
 int next_window_dims(int y_pos, int height)
 {
 	ImGui::SetNextWindowPos(ImVec2(0, static_cast<float>(y_pos)));
-	ImGui::SetNextWindowSize(ImVec2(550, static_cast<float>(height)));
+	ImGui::SetNextWindowSize(ImVec2(640, static_cast<float>(height)));
 
 	return y_pos + height;
 }
@@ -29,7 +29,7 @@ void main_gui()
 	bool update_filter = false;
 
 	// gui
-	int window_y = next_window_dims(0, 50);
+	int window_y = next_window_dims(0, 55);
 	ImGui::Begin("Output Audio Engine");
 
 		static int audio_engine = (int)AudioEngine_FAudio;
@@ -44,7 +44,8 @@ void main_gui()
 	ImGui::Begin("Sine Wave Generator");
 		
 		static int sine_note = 60;
-		update_sine |= ImGui::SliderInt("Frequency", &sine_note, NOTE_MIN, NOTE_MAX);
+		update_sine |= ImGui::SliderInt("Frequency", &sine_note, NOTE_MIN, NOTE_MAX); ImGui::SameLine();
+		ImGui::Text(" (%.2f Hz)", note_to_frequency(sine_note));
 
 		static float sine_volume = 0.0f;
 		update_sine |= ImGui::SliderFloat("Volume", &sine_volume, 0.0f, 1.0f);
@@ -55,7 +56,8 @@ void main_gui()
 	ImGui::Begin("Square Wave Generator");
 
 		static int square_note = 60;
-		update_square |= ImGui::SliderInt("Frequency", &square_note, NOTE_MIN, NOTE_MAX);
+		update_square |= ImGui::SliderInt("Frequency", &square_note, NOTE_MIN, NOTE_MAX); ImGui::SameLine();
+		ImGui::Text(" (%.2f Hz)", note_to_frequency(square_note));
 
 		static float square_volume = 0.0f;
 		update_square |= ImGui::SliderFloat("Volume", &square_volume, 0.0f, 1.0f);
@@ -66,7 +68,8 @@ void main_gui()
 	ImGui::Begin("Saw Tooth Generator");
 
 		static int saw_note = 60;
-		update_saw |= ImGui::SliderInt("Frequency", &saw_note, NOTE_MIN, NOTE_MAX);
+		update_saw |= ImGui::SliderInt("Frequency", &saw_note, NOTE_MIN, NOTE_MAX); ImGui::SameLine();
+		ImGui::Text(" (%.2f Hz)", note_to_frequency(saw_note));
 
 		static float saw_volume = 0.0f;
 		update_saw |= ImGui::SliderFloat("Volume", &saw_volume, 0.0f, 1.0f);
@@ -80,17 +83,17 @@ void main_gui()
 		static int filter_cutoff_note = 60;
 		static float filter_q = 0.7f;
 
-	update_filter |= ImGui::RadioButton("None", &filter_type, -1); ImGui::SameLine();
-	update_filter |= ImGui::RadioButton("Low-Pass", &filter_type, 0); ImGui::SameLine();
-	update_filter |= ImGui::RadioButton("Band-Pass", &filter_type, 1); ImGui::SameLine();
-	update_filter |= ImGui::RadioButton("High-Pass", &filter_type, 2); ImGui::SameLine();
-	update_filter |= ImGui::RadioButton("Notch", &filter_type, 3); 
+		update_filter |= ImGui::RadioButton("None", &filter_type, -1); ImGui::SameLine();
+		update_filter |= ImGui::RadioButton("Low-Pass", &filter_type, 0); ImGui::SameLine();
+		update_filter |= ImGui::RadioButton("Band-Pass", &filter_type, 1); ImGui::SameLine();
+		update_filter |= ImGui::RadioButton("High-Pass", &filter_type, 2); ImGui::SameLine();
+		update_filter |= ImGui::RadioButton("Notch", &filter_type, 3); 
 
-	update_filter |= ImGui::SliderInt("Cutoff Frequency", &filter_cutoff_note, 12, 108);
-	update_filter |= ImGui::SliderFloat("Q", &filter_q, 0.7f, 100.0f, "%.1f");
+		update_filter |= ImGui::SliderInt("Cutoff Frequency", &filter_cutoff_note, 12, 108); ImGui::SameLine();
+		ImGui::Text(" (%.2f Hz)", note_to_frequency(filter_cutoff_note));
+		update_filter |= ImGui::SliderFloat("Q", &filter_q, 0.7f, 100.0f, "%.1f");
 
 	ImGui::End();
-
 
 	// audio control
 	static AudioPlayer	player;
