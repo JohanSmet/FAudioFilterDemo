@@ -1,5 +1,10 @@
 # FAudio Filter Demo
 
+## Notice
+This has been merged into the official [FAudio](https://github.com/flibitijibibo/FACT) repository. This repository will probably no longer be maintained.
+
+## Intro
+
 A small demo application to test the filter functionality in [FAudio](https://github.com/flibitijibibo/FACT), an accuracy-focused XAudio reimplementation for open platforms.
 
 Inspired by the sample program from the MSDN Magazine article ["DirectX Factor - Exploring Filters in XAudio2"](https://msdn.microsoft.com/en-us/magazine/dn198248.aspx) by Charles Petzold.
